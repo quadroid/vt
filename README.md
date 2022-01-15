@@ -1,6 +1,6 @@
 # Virtual Treeview
 
-###### ▪ ▪ ▪
+▪ ▪ ▪
 
 Компонент отображения деревьев и списков.
 
@@ -842,7 +842,9 @@ end;
 Стоит упомянуть об еще одной очень важной функции для прохода по дереву — `IterateSubtree`.
 
 ```delphi
-function TBaseVirtualTree.IterateSubtree(Node: PVirtualNode; Callback: TVTGetNodeProc; Data: Pointer; Filter: TVirtualNodeStates = []; DoInit: Boolean = False; ChildNodesOnly: Boolean = False): PVirtualNode;
+function TBaseVirtualTree.IterateSubtree(Node: PVirtualNode; Callback: TVTGetNodeProc;
+Data: Pointer; Filter: TVirtualNodeStates = []; DoInit: Boolean = False;
+ChildNodesOnly: Boolean = False): PVirtualNode;
 ```
 
 Эта функция без особых забот позволяет пройтись по всем узлам дерева и для каждого выполнить какое-то действие, используя **callback**-процедуру. Кроме того, с помощью фильтра можно указать для каких именно узлов нужно вызывать **callback**-процедуру. `Node` задает начальный узел, с которого начнется проход по дереву. `DoInit` позволяет указать нужно ли проинициализировать узел перед тем, как вызывать **callback**-процедуру для него. `ChildNodesOnly` позволяет указать следует ли вызывать **callback**-процедуру для всех узлов или только для дочерних. Функция возвращает последний узел, обработанный **callback**-процедурой.
@@ -2035,7 +2037,8 @@ begin
       TextOut(NameRect.Left, NameRect.Top, NodeData^.Name + ' (доставлено)');
     // Общая цена
     Font.Style := [];
-    TextOut(PriceRect.Left, PriceRect.Top, 'Общая цена: ' + IntToStr(NodeData^.PriceKg * NodeData^.Mass) + ' р.');
+    TextOut(PriceRect.Left, PriceRect.Top, 'Общая цена: ' + IntToStr(NodeData^.PriceKg * NodeData^.Mass)
+    + ' р.');
   end;
   // Картинка
   Img := TPicture.Create;
@@ -3000,11 +3003,13 @@ begin
         // Необходимо нарисовать заголовок какой-то конкретной колонки
         case PaintInfo.Column.Index of
           // Пользователь
-          0: Draw(PaintInfo.PaintRectangle.Left + ((PaintInfo.PaintRectangle.Right - PaintInfo.PaintRectangle.Left) div 2) - (ImgUser.Width div 2),
-            PaintInfo.PaintRectangle.Top, ImgUser.Graphic);
+          0: Draw(PaintInfo.PaintRectangle.Left + ((PaintInfo.PaintRectangle.Right -
+             PaintInfo.PaintRectangle.Left) div 2) - (ImgUser.Width div 2),
+             PaintInfo.PaintRectangle.Top, ImgUser.Graphic);
           // Кол-во сообщений
-          1: Draw(PaintInfo.PaintRectangle.Left + ((PaintInfo.PaintRectangle.Right - PaintInfo.PaintRectangle.Left) div 2) - (ImgMsg.Width div 2),
-            PaintInfo.PaintRectangle.Top, ImgMsg.Graphic);
+          1: Draw(PaintInfo.PaintRectangle.Left + ((PaintInfo.PaintRectangle.Right -
+             PaintInfo.PaintRectangle.Left) div 2) - (ImgMsg.Width div 2),
+             PaintInfo.PaintRectangle.Top, ImgMsg.Graphic);
         end;
       end;
     end;
@@ -3450,8 +3455,7 @@ begin
         // Необходимость в этой переменной состоит в том, что
         // в событии инициализации нельзя использовать фильтрацию по
         // DBRec.ANum, т.к. пользователь мог отредактировать первую колонку
-        // и
-        // DBRec.ANum указывал бы на старый индекс записи, тогда как новый
+        // и DBRec.ANum указывал бы на старый индекс записи, тогда как новый
         // содержался бы в NewText.
         if Column = 0 then
           FUpdatingNum := StrToIntDef(NewText, 0)
