@@ -1,1 +1,1 @@
-del /S *.exe
+del /s *.exe
